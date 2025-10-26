@@ -1,0 +1,169 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=black,
+	urlcolor=black
+}
+\usepackage{booktabs} 
+\usepackage{amssymb}  
+\usepackage{float}
+\usepackage[font=normalsize,labelfont=bf]{caption}
+\IEEEoverridecommandlockouts
+
+\begin{document}
+	
+	\title{Image Edge Detection for Egg Size Classification}
+	
+	\author{
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{ccc}
+				Christian James E. Apuya & Ray Simon L. Bantaculo & Robert Roy P. Salvo \\
+				\textit{Department of Computer Engineering} & \textit{Department of Computer Engineering} & \textit{Department of Computer Engineering} \\
+				University of Science and Technology & University of Science and Technology & University of Science and Technology \\
+				of Southern Philippines & of Southern Philippines & of Southern Philippines \\
+				Cagayan de Oro City, Philippines & Cagayan de Oro City, Philippines & Cagayan de Oro City, Philippines \\
+				christianjamesapuya@gmail.com & bantaculoraysimon@gmail.com & salvo.robertroy@gmail.com \\
+		\end{tabular}}
+	}
+	
+	\maketitle
+	
+	\begin{abstract}
+		\textit{(subject for change)}
+		Accurate egg size classification is critical for ensuring food quality, optimizing production, and supporting automated grading systems. Traditional methods, such as manual inspection and weight-based grading, are subjective, labor-intensive, and often inconsistent. Edge detection techniques in image processing have emerged as a key tool for non-destructive and precise  of egg dimensions, enabling reliable size classification. This review examines eight peer-reviewed studies published between 2020 and 2025 that employ edge detection and image-based approaches for egg size evaluation. The analysis focuses on methodologies integrating digital signal processing (DSP) for image enhancement and noise reduction, geometric modeling of egg contours, and machine learning (ML) classifiers—including Artificial Neural Networks (ANN), Support Vector Machines (SVM), and Stacked Autoencoders (SAE)—for size prediction. Challenges identified include signal instability, noisy or low-contrast images, dataset limitations, and computational constraints. Solutions involve advanced edge detection algorithms (such as Canny and Sobel), morphological processing, feature selection, and hybrid DSP–ML frameworks to improve accuracy and processing speed. Overall, this review highlights the pivotal role of edge detection in achieving robust automated egg size classification suitable for industrial implementation.
+	\end{abstract}
+	
+	\begin{IEEEkeywords}
+		Egg size classification, Edge detection, Digital Signal Processing, Machine Learning, Geometric Modeling
+	\end{IEEEkeywords}
+
+\section{Introduction}
+
+\subsection{Background of the Study}
+Chicken eggs are one of the most widely consumed sources of protein worldwide and constitute a vital component of both household and commercial diets. The growing demand for eggs has involved the development of efficient, reliable, and non-destructive techniques for grading, sizing, and quality assessment. Traditionally, egg sizing has relied on manual inspection and weight-based classification. However, manual methods are prone to human error, fatigue, and inconsistency, and conventional weight measurement systems often fail to capture the full range of geometric and morphological characteristics relevant to egg quality \cite{asadi2010}\cite{bondoc2021}.
+
+Recent advancements in image processing and machine learning have enabled automated systems capable of analyzing the physical properties of eggs through digital images. By using computer vision and digital signal processing (DSP) techniques, it is now possible to determine the shape, area, and dimensions of eggs more accurately \cite{thipakorn2017}\cite{nasir2018}. Several studies have utilized edge detection and geometric modeling for non-destructive egg size estimation, while others have combined artificial intelligence approaches, such as Artificial Neural Networks (ANN), Support Vector Machines (SVM), and Stacked Autoencoders (SAE), to improve classification accuracy \cite{huang2024}\cite{yabanova2025}. 
+
+Despite these advancements, existing systems often depend on supervised learning, requiring large labeled datasets and controlled laboratory conditions. Such limitations reduce their scalability and adaptability to real-world environments. Thus, a DSP-based and machine learning techniques approach that can classify eggs efficiently using image edge detection without extensive manual labeling or expensive hardware.
+
+\subsection{Objectives of the Study}
+The main objective of this study is to develop an image-based egg size classification system using Digital Signal Processing (DSP) and Machine Learning (ML) techniques through edge detection. Specifically, this study aims to:
+\begin{enumerate}
+	\item Implement image preprocessing using Otsu’s thresholding and morphological operations to segment egg images effectively;
+	\item Extract geometric and texture-based features from segmented egg images using DSP methods such as Regionprops and Local Binary Pattern (LBP);
+	\item Apply normalization and clustering through unsupervised Machine Learning (K-Means) to group eggs into categories such as Small, Medium, and Large;
+	\item Evaluate the clustering performance using Silhouette Score and Elbow Method to assess accuracy and optimal cluster formation; and
+	\item Visualize the classification results using Principal Component Analysis (PCA) to provide interpretable data insights.
+\end{enumerate}
+
+This approach aims to provide a non-destructive, and explainable egg size classification model that enhances automation and accuracy for agricultural and industrial applications.
+
+
+\section{Literature Review}
+
+Recent research in egg size classification highlights the growing integration of Digital Signal Processing (DSP), image processing, and Machine Learning (ML) to develop efficient, non-destructive, and automated egg grading systems. Traditional methods such as manual inspection and weight-based measurement have been replaced by computer vision approaches capable of analyzing the geometric and morphological properties of eggs. The following subsections discuss the different methods and technologies applied across related studies.
+
+\subsection{DSP Filtering and Signal Stabilization}
+Digital Signal Processing (DSP) has been applied to enhance the precision of egg size measurement by reducing signal noise and improving stability during image and weight acquisition. Yabanova \cite{yabanova2017} developed a DSP-based dynamic mass measurement system utilizing Sinc, Bessel, and Hamming filters to suppress mechanical vibrations and electrical interference. This approach enabled accurate real-time weighing through improved signal quality. Similarly, Seçil et al. \cite{secil2020} integrated DSP microcontrollers into an automated egg weighing system combined with ML classifiers, achieving faster response times and more reliable data acquisition. These studies demonstrate the effectiveness of DSP filtering in stabilizing sensor outputs and ensuring high-fidelity data for subsequent feature extraction.
+
+\subsection{Geometric Modeling and Feature Extraction}
+The use of geometric modeling in egg classification focuses on calculating physical characteristics such as volume, area, and shape index. Sedghi and Ghaderi \cite{sedghi2023} utilized digital image analysis to measure egg surface area and volume based on longitudinal axis and maximum breadth, applying mathematical relationships to improve weight estimation. Okinda et al. \cite{okinda2020} proposed a computer vision model that estimated egg volume using two-dimensional projections, while Soltani et al. \cite{soltani2015} employed Pappus’ theorem in combination with Artificial Neural Networks (ANN) to predict egg volume with high correlation accuracy. Liu et al. \cite{liu2023} enhanced this further by introducing a single-view imaging method capable of measuring egg dimensions efficiently for small-batch processing. These geometric-based approaches illustrate that digital imaging can replace traditional weighing systems by leveraging edge detection and contour-based measurement.
+
+\subsection{Machine Learning Approaches}
+Machine Learning has been widely used to automate egg classification and improve recognition accuracy. Thipakorn et al. \cite{thipakorn2017} implemented an image processing and ML model for egg size classification, using edge detection and geometric features as input for training. Ab Nasir et al. \cite{nasir2018} compared shape-based and weight-based parameters, concluding that geometric features produced higher accuracy than conventional weight-based grading. Huang et al. \cite{huang2024} utilized a Multilayer Perceptron (MLP) neural network to classify eggs from different farming systems, achieving faster and more accurate predictions. Meanwhile, Yabanova et al. \cite{yabanova2025} employed a Stacked Autoencoder (SAE) for real-time sorting and achieved 100\% classification accuracy in milliseconds per egg. These studies confirm that ML algorithms—particularly ANN, SVM, and SAE—are capable of precise classification but remain dependent on large labeled datasets and high computational resources.
+
+\subsection{Identified Challenges and Gaps}
+Across all reviewed studies, several recurring challenges have been identified. Signal instability caused by vibration and noise remains a key issue for real-time DSP-based weighing systems \cite{yabanova2017}. Limited and imbalanced datasets often lead to model overfitting and poor generalization, while redundant and correlated features increase computation time and reduce model efficiency \cite{nasir2018}\cite{sedghi2023}. Moreover, most ML models used in these studies are supervised, requiring labeled datasets that are time-consuming to collect \cite{huang2024}\cite{yabanova2025}. Complex neural networks also lack interpretability, making them less transparent for industrial applications.
+
+\section{Methodology}
+
+This study implemented a systematic approach to develop an automated egg size classification system using Digital Signal Processing (DSP) and Machine Learning (ML) techniques. The methodology consists of six major stages: image acquisition, preprocessing, feature extraction, feature normalization, clustering, and evaluation.
+
+\subsection{Image Acquisition}
+The dataset used in this study was obtained from an online open-source repository hosted on \textit{Kaggle}. The dataset contains images of chicken eggs of varying sizes and orientations. Each image was captured under consistent lighting conditions, providing clear object boundaries for image segmentation. All images were in RGB format and later converted into grayscale for digital processing. The dataset served as the input for developing and validating the image-based egg size classification model.
+
+\subsection{Preprocessing}
+To prepare the images for feature extraction, a series of DSP-based preprocessing operations were applied. The goal of this stage was to remove unwanted noise, enhance edges, and isolate the egg region from the background. The following steps were performed:
+
+\begin{enumerate}
+	\item \textbf{Grayscale Conversion:} Each RGB image was converted to grayscale to simplify processing by reducing color information.
+	\item \textbf{Noise Reduction:} A median filter was applied to smooth the image and reduce salt-and-pepper noise.
+	\item \textbf{Thresholding:} Otsu’s method was employed to determine an adaptive binary threshold that separates the egg from the background.
+	\item \textbf{Morphological Operations:} Morphological closing was used to fill small holes inside the egg region, followed by morphological opening to remove small specks and artifacts around the object.
+\end{enumerate}
+
+These preprocessing steps ensured that the segmented binary image clearly represented the egg contour, improving the accuracy of feature extraction.
+
+\subsection{Feature Extraction}
+After segmentation, Digital Signal Processing (DSP) techniques were applied to extract measurable geometric and texture-based features from each egg image.
+
+\begin{enumerate}
+	\item \textbf{Geometric Features:} Using the \texttt{regionprops} function, the system computed area, perimeter, major axis length, minor axis length, eccentricity, and shape index (the ratio of breadth to length multiplied by 100). These features describe the physical dimensions and overall shape of the egg.
+	\item \textbf{Texture Features:} Local Binary Pattern (LBP) analysis was used to capture microtexture variations on the egg surface, providing additional descriptive information beyond geometry.
+\end{enumerate}
+
+The extracted features formed a structured dataset containing both geometric and texture attributes for each image.
+
+\subsection{Feature Normalization}
+To ensure that each feature contributed equally to the clustering algorithm, all extracted features were normalized using the \texttt{StandardScaler} (Z-score normalization). This step standardized each feature to have zero mean and unit variance, preventing bias from large-valued parameters such as area or perimeter.
+
+\subsection{Clustering and Classification}
+The normalized features were processed using an unsupervised Machine Learning algorithm—\textbf{K-Means clustering}. The algorithm automatically grouped the eggs into three clusters corresponding to size categories: small, medium, and large. Unlike supervised models, this approach does not require labeled datasets, making it efficient and adaptable for real-world applications.
+
+The optimal number of clusters ($k=3$) was determined using both the \textbf{Elbow Method} and the \textbf{Silhouette Score}, which evaluate cluster compactness and separation. Higher silhouette values indicated better-defined clusters.
+
+\subsection{Evaluation and Visualization}
+Model evaluation was performed using quantitative and qualitative methods:
+\begin{itemize}
+	\item \textbf{Quantitative Evaluation:} The Silhouette Score and Elbow Method were used to assess the quality and stability of the formed clusters.
+	\item \textbf{Visualization:} Principal Component Analysis (PCA) was applied to reduce the feature space into two dimensions, allowing visual inspection of the cluster distribution. The PCA scatter plot helped validate whether the K-Means clustering effectively grouped eggs according to size characteristics.
+\end{itemize}
+
+
+
+\section{Results and Discussion}
+
+
+\section{Conclusion}
+
+\begin{thebibliography}{00}
+	
+	\bibitem{thipakorn2017} J. Thipakorn, R. Waranusast, and P. Riyamongkol, “Egg weight prediction and egg size classification using image processing and machine learning,” in \textit{Proc. 14th Int. Conf. Electrical Engineering/Electronics, Computer, Telecommunications and Information Technology (ECTI-CON)}, 2020, pp. 477–480.
+	
+	\bibitem{nasir2018} A. F. Ab Nasir, S. S. Sabarudin, A. P. P. A. Majeed, and A. S. A. Ghani, “Automated egg grading system using computer vision: Investigation on weight measure versus shape parameters,” in \textit{IOP Conference Series: Materials Science and Engineering}, vol. 342, no. 1, p. 012003, IOP Publishing, 2021.
+	
+	\bibitem{liu2023} C. Liu, Q. Wang, M. Ma, Z. Zhu, W. Lin, S. Liu, and W. Fan, “Single-view measurement method for egg size based on small-batch images,” \textit{Foods}, vol. 12, no. 5, p. 936, 2023.
+	
+	\bibitem{bondoc2021} O. L. Bondoc, R. C. Santiago, A. R. Bustos, A. O. Ebron, A. R. Ramos, et al., “Grading and size classification of chicken eggs produced by native, egg-type, meat-type, dual-purpose and fancy-type breeds under Philippine conditions,” \textit{International Journal of Poultry Science}, vol. 20, no. 2, pp. 87–97, 2021.
+	
+	\bibitem{sedghi2023} M. Sedghi and M. Ghaderi, “Digital analysis of egg surface area and volume: Effects of longitudinal axis, maximum breadth and weight,” \textit{Information Processing in Agriculture}, vol. 10, no. 2, pp. 229–239, 2023.
+	
+	\bibitem{huang2024} M. C. Huang, Q. Lin, H. Cai, and H. Ni, “Fast recognition of table eggs from different farming systems using physical traits and multi-layer perceptron,” \textit{Brazilian Journal of Poultry Science}, vol. 26, no. 3, pp. eRBCA–2023, 2024.
+	
+	\bibitem{yabanova2025} İ. Yabanova, M. Yumurtacı, and T. Ünler, “Design of a dynamic weighing system and AI-based sorting process for egg sorting machines,” \textit{Journal of Agricultural Sciences}, vol. 31, no. 3, pp. 802–813, 2025.
+	
+	\bibitem{asadi2010} V. M. H. R. Asadi and M. H. Raoufat, “Egg weight estimation by machine vision and neural network techniques (a case study fresh egg),” Unpublished manuscript, 2020.
+	
+	\bibitem{aragua2018} A. Aragua and V. İ. Mabayo, “A cost-effective approach for chicken egg weight estimation through computer vision,” \textit{International Journal of Agriculture Environment and Food Sciences}, vol. 2, no. 3, pp. 82–87, 2022.
+	
+	\bibitem{yabanova2017} İ. Yabanova, “Digital Signal Processing–based Dynamic Mass Measurement System for Egg Weighing Process,” \textit{Measurement and Control}, vol. 50, no. 4, pp. 97–102, 2020.
+	
+	\bibitem{secil2020} G. E. Seçil, M. Yumurtacı, S. Ergin, and İ. Yabanova, “Weight-Based Classification of Eggs Using Several State-of-the-Art Classifiers on a Mechanical Weighing System Integrated with a DSP Microcontroller,” \textit{Eskişehir Technical University Journal of Science and Technology A - Applied Sciences and Engineering}, vol. 21, no. 4, pp. 499–513, 2020.
+	
+	\bibitem{okinda2020} C. Okinda, Y. Sun, I. Nyalala, T. Korohou, S. Opiyo, J. Wang, and M. Shen, “Egg volume estimation based on image processing and computer vision,” \textit{Journal of Food Engineering}, vol. 283, p. 110041, 2020.
+	
+	\bibitem{soltani2015} M. Soltani, M. Omid, and R. Alimardani, “Egg volume prediction using machine vision technique based on Pappus theorem and artificial neural network,” \textit{Journal of Food Science and Technology}, vol. 52, no. 5, pp. 3065–3071, 2023.
+	
+\end{thebibliography}
+
+\end{document}
