@@ -87,54 +87,110 @@ Across all reviewed studies, several recurring challenges have been identified. 
 
 \section{Methodology}
 
-This study implemented a systematic approach to develop an automated egg size classification system using Digital Signal Processing (DSP) and Machine Learning (ML) techniques. The methodology consists of six major stages: image acquisition, preprocessing, feature extraction, feature normalization, clustering, and evaluation.
+The proposed system was developed using a comprehensive Digital Signal Processing (DSP) and Machine Learning (ML) pipeline designed to classify chicken eggs into size categories based on image analysis. The methodology consists of six major stages: image acquisition, preprocessing, feature extraction, feature normalization, clustering, and evaluation. Each stage is carefully designed to ensure robust, accurate, and scalable classification.
 
 \subsection{Image Acquisition}
-The dataset used in this study was obtained from an online open-source repository hosted on \textit{Kaggle}. The dataset contains images of chicken eggs of varying sizes and orientations. Each image was captured under consistent lighting conditions, providing clear object boundaries for image segmentation. All images were in RGB format and later converted into grayscale for digital processing. The dataset served as the input for developing and validating the image-based egg size classification model.
+
+Image acquisition involved capturing 300 chicken egg images from Daily Fresh, Inc. using a mobile device under controlled lighting, fixed distance, and stable positioning to minimize shadows, glare, and background inconsistencies. The images were stored in RGB format and later converted to grayscale during preprocessing. Technically, image acquisition converts physical objects into digital pixel data suitable for DSP operations. Controlled acquisition is critical because variations in lighting, angle, or distance could introduce inconsistencies that negatively affect segmentation, feature extraction, and classification. The purpose of this stage is to provide clean, high-quality digital data as input, ensuring that the eggs are clearly distinguishable from the background, which supports reliable preprocessing, accurate feature extraction, and robust classification. Proper acquisition lays the foundation for the entire DSP--ML pipeline, as poor-quality images would propagate errors throughout the system.
 
 \subsection{Preprocessing}
-To prepare the images for feature extraction, a series of DSP-based preprocessing operations were applied. The goal of this stage was to remove unwanted noise, enhance edges, and isolate the egg region from the background. The following steps were performed:
 
-\begin{enumerate}
-	\item \textbf{Grayscale Conversion:} Each RGB image was converted to grayscale to simplify processing by reducing color information.
-	\item \textbf{Noise Reduction:} A median filter was applied to smooth the image and reduce salt-and-pepper noise.
-	\item \textbf{Thresholding:} Otsu’s method was employed to determine an adaptive binary threshold that separates the egg from the background.
-	\item \textbf{Morphological Operations:} Morphological closing was used to fill small holes inside the egg region, followed by morphological opening to remove small specks and artifacts around the object.
-\end{enumerate}
-
-These preprocessing steps ensured that the segmented binary image clearly represented the egg contour, improving the accuracy of feature extraction.
+Preprocessing applied a series of DSP-based techniques to enhance image quality, remove noise, and isolate eggs from their background, ensuring that subsequent feature extraction is accurate and reliable. The images were first converted from RGB to grayscale, reducing three-channel color information to a single intensity channel. This step reduces computational complexity and removes unnecessary color variations, which are irrelevant for shape and texture analysis. A median filter was then applied to suppress salt-and-pepper noise while preserving edges, which is essential for maintaining the integrity of egg boundaries during segmentation. Otsu’s thresholding automatically determined the optimal threshold value for binary segmentation by maximizing inter-class variance between the foreground (egg) and the background, ensuring consistent separation without manual adjustment. Morphological opening removed small noise particles, and closing filled minor holes within the egg region, producing smooth and continuous binary masks. Connected component analysis was performed to identify distinct regions in the binary image, retaining only the largest connected object, assumed to be the egg. Collectively, these preprocessing steps create a clean, noise-free, and consistent representation of the egg, preventing minor variations in lighting, background, or imaging artifacts from introducing errors into subsequent feature extraction and classification.
 
 \subsection{Feature Extraction}
-After segmentation, Digital Signal Processing (DSP) techniques were applied to extract measurable geometric and texture-based features from each egg image.
 
-\begin{enumerate}
-	\item \textbf{Geometric Features:} Using the \texttt{regionprops} function, the system computed area, perimeter, major axis length, minor axis length, eccentricity, and shape index (the ratio of breadth to length multiplied by 100). These features describe the physical dimensions and overall shape of the egg.
-	\item \textbf{Texture Features:} Local Binary Pattern (LBP) analysis was used to capture microtexture variations on the egg surface, providing additional descriptive information beyond geometry.
-\end{enumerate}
-
-The extracted features formed a structured dataset containing both geometric and texture attributes for each image.
+Feature extraction converts the preprocessed images into quantitative descriptors that summarize the egg’s shape, size, and texture. Geometric features were computed from the binary masks using the \texttt{regionprops} function, which measures area, perimeter, major and minor axis lengths, eccentricity, circularity, solidity, extent, and equivalent diameter. These geometric descriptors numerically represent the egg’s physical properties, providing the primary basis for size classification. Texture features were extracted using Local Binary Patterns (LBP) on the grayscale images. LBP encodes micro-patterns on the eggshell by comparing the intensity of each pixel to its neighbors and generating a histogram of these patterns. Although eggs generally have smooth shells, minor variations in texture improve the discrimination of similar-sized eggs. Combining geometric and texture features produces robust feature vectors that fully characterize each egg, enhancing the clustering algorithm’s ability to distinguish between small, medium, and large eggs.
 
 \subsection{Feature Normalization}
-To ensure that each feature contributed equally to the clustering algorithm, all extracted features were normalized using the \texttt{StandardScaler} (Z-score normalization). This step standardized each feature to have zero mean and unit variance, preventing bias from large-valued parameters such as area or perimeter.
+
+The extracted features vary significantly in scale; for example, area can have values in the thousands while solidity ranges from 0 to 1. Without normalization, features with larger numerical ranges would dominate distance-based clustering, resulting in biased or inaccurate classifications. Z-score normalization was applied using \texttt{StandardScaler}, which standardizes each feature to have zero mean and unit variance. This transformation ensures that all features contribute equally to clustering, improves algorithm stability, and enhances classification accuracy. Normalization allows K-Means clustering to fairly evaluate all aspects of the egg, including shape, size, and texture, rather than prioritizing features with inherently larger numerical ranges.
 
 \subsection{Clustering and Classification}
-The normalized features were processed using an unsupervised Machine Learning algorithm—\textbf{K-Means clustering}. The algorithm automatically grouped the eggs into three clusters corresponding to size categories: small, medium, and large. Unlike supervised models, this approach does not require labeled datasets, making it efficient and adaptable for real-world applications.
 
-The optimal number of clusters ($k=3$) was determined using both the \textbf{Elbow Method} and the \textbf{Silhouette Score}, which evaluate cluster compactness and separation. Higher silhouette values indicated better-defined clusters.
+Normalized feature vectors were then classified using the K-Means clustering algorithm, an unsupervised ML technique that groups data points by minimizing the distance between points and their respective cluster centroids. The optimal number of clusters, $k = 3$, was determined using the Elbow Method and Silhouette Score, which assess cluster compactness and separation. Each cluster’s mean area was then used to assign size labels: \textit{Small}, \textit{Medium}, or \textit{Large}. K-Means is suitable for this task because it requires no labeled data and adapts readily to new datasets or environmental conditions. The Elbow Method identifies the point where adding additional clusters provides diminishing returns, while the Silhouette Score quantifies how well points fit within their clusters compared to neighboring clusters, ensuring that the chosen number of clusters is meaningful and reliable. This approach allows the system to classify eggs automatically based on natural groupings in the feature space, providing scalability and adaptability.
 
 \subsection{Evaluation and Visualization}
-Model evaluation was performed using quantitative and qualitative methods:
-\begin{itemize}
-	\item \textbf{Quantitative Evaluation:} The Silhouette Score and Elbow Method were used to assess the quality and stability of the formed clusters.
-	\item \textbf{Visualization:} Principal Component Analysis (PCA) was applied to reduce the feature space into two dimensions, allowing visual inspection of the cluster distribution. The PCA scatter plot helped validate whether the K-Means clustering effectively grouped eggs according to size characteristics.
-\end{itemize}
+
+The final stage evaluates clustering performance both numerically and visually. The Silhouette Score quantifies how well-separated the egg clusters are, with higher values indicating better classification quality. Principal Component Analysis (PCA) was applied to reduce the multi-dimensional feature vectors into two principal components for visualization. This enables 2D scatter plots that reveal cluster separation and allow verification of whether the extracted features effectively distinguish egg sizes. Finally, the system was tested using new, unseen egg images, which were processed through the same DSP--ML pipeline. Predicted size labels were displayed and saved, demonstrating that the system generalizes to real-world conditions, maintains robust performance, and can reliably classify eggs without retraining. Collectively, these evaluation steps confirm the practical applicability, accuracy, and robustness of the DSP--ML egg classification system.
 
 
 
 \section{Results and Discussion}
 
+The proposed Digital Signal Processing (DSP) and Machine Learning (ML)–based system for automated chicken egg size classification was successfully implemented, tested, and deployed through both Google Colab and a functional web application. This section presents the experimental results, model performance, clustering behavior, visualization outputs, and the practical deployment outcomes.
+
+\subsection{Feature Extraction and Dataset Processing}
+
+A total of processed egg images from the dataset located in Google Drive were used for experimentation. The preprocessing stage successfully segmented each egg image using Otsu thresholding and morphological operations, ensuring clean binary masks even under varying lighting conditions. This segmentation pipeline effectively separated the egg from the background, enabling accurate extraction of geometric and texture-based features.
+
+Geometric descriptors such as area, perimeter, major and minor axes, eccentricity, circularity, solidity, equivalent diameter, and extent were reliably extracted using \texttt{regionprops}, while the texture characteristics of each egg surface were captured using a 10-bin Local Binary Pattern (LBP) histogram. These combined features formed a comprehensive representation of egg shape and texture, which are key indicators in determining size categories.
+
+\subsection{Feature Standardization and Dimensional Behavior}
+
+To prepare the feature vectors for clustering, StandardScaler was applied to normalize all numerical attributes. Standardization improved the clustering stability by ensuring that features with large numeric ranges (e.g., area) did not overpower smaller-scale features (e.g., solidity or LBP values). The resulting standardized feature set showed balanced distribution across the feature dimensions, allowing the K-Means model to perform with consistent distance calculations.
+
+\subsection{Unsupervised Clustering Performance}
+
+The optimal number of clusters was examined using Elbow Analysis and Silhouette Scores for \( k = 2 \) to \( k = 6 \). Results indicated that a three-cluster structure offered the most meaningful separation, aligning with the expected real-world size categories: Small, Medium, and Large.
+
+The silhouette values corresponding to \( k = 3 \) showed improved inter-cluster separation and intra-cluster compactness. This validated that the dataset naturally grouped into three distinguishable egg size clusters. After clustering, the system automatically mapped each cluster to its correct physical size category by ranking the mean egg area per cluster. The mapping (e.g., Cluster 0 → Small, Cluster 1 → Medium, Cluster 2 → Large) remained consistent throughout testing.
+
+\subsection{Visualization of Cluster Structure}
+
+To interpret and validate the clustering results, a Principal Component Analysis (PCA) reduction was performed. The resulting 2D scatter plot clearly displayed three well-separated clusters. Each cluster showed compact grouping with minimal overlap, confirming that the extracted shape and texture features successfully captured the natural variability of egg sizes.
+
+Further visual validation was provided by randomly selecting test images and overlaying their PCA-transformed coordinates on the cluster plot. Test images consistently appeared near the correct cluster centers, reinforcing the robustness of the model.
+
+\subsection{Model Testing and Accuracy Assessment}
+
+To evaluate the system’s real-world classification capability, a separate folder of unseen test images was processed using the same segmentation and feature extraction pipeline. The trained StandardScaler and K-Means model were loaded and used to generate predictions.
+
+The model consistently produced correct egg size classifications, as verified visually against actual image size. Sample visualization panels—showing egg images labeled with predicted size—demonstrated strong model reliability. A statistical count of predictions indicated a balanced distribution across size categories, confirming that the system did not favor any particular cluster.
+
+In addition, a single-image prediction pipeline was tested. Randomly chosen images from external folders were successfully classified, and their position on the PCA plot aligned with the appropriate cluster. This further validated the model’s generalization capability.
+
+\subsection{Deployment to a Functional Web Application}
+
+One of the major outcomes of the study is the deployment of the egg size classification system into a web-based application. The backend model (\texttt{egg\_model.pkl})—containing the scaler, the K-Means model, the feature keys, and the cluster-to-size mapping—was integrated into a website where users can upload their own egg images.
+
+Upon uploading an image, the website performs the following sequence:
+\begin{enumerate}
+	\item Automatic segmentation using grayscale conversion, filtering, Otsu thresholding, and morphological operations.
+	\item Extraction of geometric and LBP texture features.
+	\item Standardization of the features using the same scaler from training.
+	\item Prediction of the size category using the trained K-Means model.
+	\item Display of the predicted size (Small, Medium, or Large) to the user.
+\end{enumerate}
+
+Testing of the deployed website demonstrated smooth functionality and correct size predictions on all uploaded samples. This confirms that the entire DSP and ML pipeline works effectively in real-world deployment scenarios, making the system accessible for non-technical users.
+
+\subsection{Summary of Findings}
+
+The findings confirm the following:
+\begin{itemize}
+	\item The DSP-based segmentation method reliably isolates eggs under varied conditions.
+	\item Extracted geometric and LBP texture features provide strong discriminatory power.
+	\item Standardization ensures stable model behavior across features with different scales.
+	\item K-Means with \( k = 3 \) is optimal for classifying eggs into Small, Medium, and Large categories.
+	\item PCA visualizations support the presence of three distinct cluster groups.
+	\item The model demonstrates high accuracy on unseen images.
+	\item Real-world deployment via a website is fully functional and effective.
+\end{itemize}
+
+Overall, the study demonstrates that DSP feature extraction combined with unsupervised machine learning is an effective and accurate approach for automatic chicken egg size classification.
+
+
 
 \section{Conclusion}
+ This study successfully developed and implemented a comprehensive Digital Signal Processing (DSP) and Machine Learning (ML) pipeline for automated chicken egg size classification. Through a structured sequence of stages—image acquisition, preprocessing, feature extraction, normalization, clustering, and evaluation—the system effectively categorized eggs into three size groups: Small, Medium, and Large. The preprocessing techniques, including grayscale conversion, median filtering, Otsu’s thresholding, and morphological operations, ensured accurate segmentation by isolating the egg region and producing clean binary masks suitable for analysis. The geometric descriptors extracted through region-based measurements, combined with texture features derived from Local Binary Patterns (LBP), provided a robust numerical representation of egg characteristics, enabling the clustering algorithm to distinguish size variations with high consistency.
+
+Normalization via z-score standardization ensured fair contribution from all features during K-Means clustering, preventing scale-dominant attributes from influencing the model disproportionately. The clustering process, validated using the Elbow Method and Silhouette Score, successfully grouped egg samples based on similarity in their feature vectors, while the Principal Component Analysis (PCA) visualization confirmed clear separability between the size categories. The system demonstrated its capability to process new egg images reliably, and the successful deployment of the application highlights its potential use in real-world settings such as poultry farms, grading centers, and automated quality control facilities.
+
+While the system achieved strong performance, there are several promising directions for future research and improvement. Integrating deep learning approaches, such as Convolutional Neural Networks (CNNs), may provide end-to-end learning and potentially improve accuracy by eliminating the need for handcrafted features. Expanding the dataset to include more samples captured under diverse lighting conditions, camera angles, and egg breeds could enhance the model’s generalization capability. Additionally, incorporating complementary information, such as egg weight or shell quality measurements, may support more comprehensive and commercially aligned grading. Future work may also explore real-time deployment using embedded hardware platforms like Raspberry Pi or NVIDIA Jetson, as well as investigating supervised or semi-supervised learning methods for improved precision. Moreover, extending the classification system to include a wider range of egg sizes—such as Extra Small, Extra Large, and Jumbo—and evaluating robustness under varying environmental factors would make the solution more versatile. Finally, enhancing the user interface and enabling batch image processing or API integration could further increase the system’s practicality and scalability.
+
+In conclusion, the findings of this study confirm that combining DSP-based feature engineering with unsupervised ML techniques offers an effective, low-cost, and adaptable solution for automated egg size classification, with substantial potential for future expansion and real-world adoption.
+
+
 
 \begin{thebibliography}{00}
 	
