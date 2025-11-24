@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.5)  24 NOV 2025 00:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.5)  25 NOV 2025 04:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -547,7 +547,7 @@ r/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 [2]
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-02.
+09.
  (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -557,18 +557,143 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 [3]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 136.
+            Default family used instead on input line 147.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 136.
+            Default family used instead on input line 147.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 136.
+            Default family used instead on input line 147.
+
+
+<1-Metrics.png, id=164, 1606.0pt x 803.0pt>
+File: 1-Metrics.png Graphic file (type png)
+<use 1-Metrics.png>
+Package pdftex.def Info: 1-Metrics.png  used on input line 155.
+(pdftex.def)             Requested size: 258.0pt x 128.99724pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 155--156
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
+
+ []
+
+
+Underfull \hbox (badness 3803) in paragraph at lines 176--177
+\OT1/ptm/m/n/10 In-dex (DBI) and Calinski-Harabasz In-dex (CHI) were
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
+
+ []
+
+<2-Cluster.png, id=166, 1193.45876pt x 491.8375pt>
+File: 2-Cluster.png Graphic file (type png)
+<use 2-Cluster.png>
+Package pdftex.def Info: 2-Cluster.png  used on input line 180.
+(pdftex.def)             Requested size: 258.0pt x 106.32086pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 180--181
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[4 <./1-Metrics.png>]
+<3-PCAVisual.png, id=175, 690.58pt x 592.2125pt>
+File: 3-PCAVisual.png Graphic file (type png)
+<use 3-PCAVisual.png>
+Package pdftex.def Info: 3-PCAVisual.png  used on input line 199.
+(pdftex.def)             Requested size: 258.0pt x 221.24779pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 199--200
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+<4-Testing.png, id=177, 1494.58376pt x 862.22125pt>
+File: 4-Testing.png Graphic file (type png)
+<use 4-Testing.png>
+Package pdftex.def Info: 4-Testing.png  used on input line 213.
+(pdftex.def)             Requested size: 258.0pt x 148.83858pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 213--214
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[5 <./2-Cluster.png> <./3-PCAVisual.png>]
+<5-PCATesting.png, id=186, 690.58pt x 592.2125pt>
+File: 5-PCATesting.png Graphic file (type png)
+<use 5-PCATesting.png>
+Package pdftex.def Info: 5-PCATesting.png  used on input line 224.
+(pdftex.def)             Requested size: 258.0pt x 221.24779pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 224--225
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<6-SamplePrediction.png, id=188, 408.52625pt x 333.245pt>
+File: 6-SamplePrediction.png Graphic file (type png)
+<use 6-SamplePrediction.png>
+Package pdftex.def Info: 6-SamplePrediction.png  used on input line 233.
+(pdftex.def)             Requested size: 258.0pt x 210.4692pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 233--234
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
 
-[4]
+
+[6 <./4-Testing.png> <./5-PCATesting.png> <./6-SamplePrediction.png>]
+<7-Web.png, id=197, 1154.51324pt x 522.15076pt>
+File: 7-Web.png Graphic file (type png)
+<use 7-Web.png>
+Package pdftex.def Info: 7-Web.png  used on input line 252.
+(pdftex.def)             Requested size: 258.0pt x 116.68211pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 252--253
+ [][] 
+ []
+
+
+
+
+
+[7 <./7-Web.png>]
+Underfull \hbox (badness 6428) in paragraph at lines 303--304
+[]\OT1/ptm/m/n/8 Dalmaijer, E.S., Nord, C.L. & As-tle, D.E. Sta-tis-ti-cal powe
+r
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--304
+\OT1/ptm/m/n/8 for clus-ter anal-y-sis. \OT1/ptm/m/it/8 BMC Bioin-for-mat-ics 2
+3, 205 (2022).
+ []
 
 
 ** Conference Paper **
@@ -583,35 +708,40 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[5] (DSP-Final-PIT.aux)
+
+
+[8
+
+] (DSP-Final-PIT.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `DSP-Final-PIT.out' has not changed.
-(rerunfilecheck)             Checksum: 120033581F8D8AE86DB646DA90F9B821;4747.
+(rerunfilecheck)             Checksum: 5551CC682B92A3B8EFD08391D627E5E2;4800.
  ) 
 Here is how much of TeX's memory you used:
- 12649 strings out of 468130
- 202123 string characters out of 5431117
- 631716 words of memory out of 5000000
- 41074 multiletter control sequences out of 15000+600000
- 664760 words of font info for 116 fonts, out of 8000000 for 9000
+ 12723 strings out of 468130
+ 203688 string characters out of 5431117
+ 633035 words of memory out of 5000000
+ 41141 multiletter control sequences out of 15000+600000
+ 665867 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,14n,79p,1507b,449s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,14n,79p,1450b,582s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1
 000.pk><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmr10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmsy7.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts
-/type1/urw/courier/ucrr8a.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/font
-s/type1/urw/times/utmb8a.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts
-/type1/urw/times/utmbi8a.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts
-/type1/urw/times/utmr8a.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/
-type1/urw/times/utmri8a.pfb>
-Output written on DSP-Final-PIT.pdf (5 pages, 150168 bytes).
+/cm/cmex10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmr10.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/User/AppData/Local/Programs/MiK
+TeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/User/AppData/Local/Programs/Mi
+KTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/User/AppData/Local/Programs/MiK
+TeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/User/AppData/Local/Programs/MiK
+TeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/User/AppData/Local/Programs/MiKT
+eX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on DSP-Final-PIT.pdf (8 pages, 3522868 bytes).
 PDF statistics:
- 229 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 500000)
- 201 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 270 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
+ 236 words of extra memory for PDF output out of 10000 (max. 10000000)
 
